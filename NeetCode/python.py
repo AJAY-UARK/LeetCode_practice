@@ -111,3 +111,23 @@ class Solution:
         ans = list(hashTable.values())
 
         return ans
+    
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        h1 = {}
+        for i in range(len(nums)):
+            if nums[i] in h1:
+                h1[nums[i]] += 1
+            else:
+                h1[nums[i]] = 1
+        
+        freq = [[] for _ in range(len(nums)+1)]
+
+        for n, c in h1.items():
+            freq[c].append(n)
+        
+        ans = []
+        for i in range(len(freq)-1,0,-1):
+            for n in freq[i]:
+                ans.append(n)
+                if len(ans) == k:
+                    return ans
