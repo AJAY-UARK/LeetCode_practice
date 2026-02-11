@@ -131,3 +131,23 @@ class Solution:
                 ans.append(n)
                 if len(ans) == k:
                     return ans
+                
+    def encode(self, strs: List[str]) -> str:
+        string = ""
+        for s in strs:
+            count = len(s)
+            string += f"{count}#{s}"
+        return string
+
+    def decode(self, s: str) -> List[str]:
+        ans = []
+        count = 0
+        while count < len(s):
+            count2 = count
+            while s[count2] != "#":
+                count2 += 1
+            length = int(s[count:count2])
+            string = s[count2 + 1 : count2 + 1 + length]
+            ans.append(string)
+            count = count2 + 1 + length
+        return ans
