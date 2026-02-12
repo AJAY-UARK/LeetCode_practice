@@ -151,3 +151,23 @@ class Solution:
             ans.append(string)
             count = count2 + 1 + length
         return ans
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        left2right = []
+        right2left = []
+        product = 1
+
+        for i in range(len(nums)):
+            if i > 0:
+                product *= nums[i-1]
+            left2right.append(product)
+        
+        product = 1
+        for i in range(len(nums)-1, -1, -1):
+            if i < len(nums)-1:
+                product *= nums[i+1]
+            right2left.append(product)
+        
+        right2left = right2left[::-1]
+        res = [a*b for a,b in zip(left2right, right2left)]
+        
+        return res
