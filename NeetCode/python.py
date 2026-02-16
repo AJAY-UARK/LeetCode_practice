@@ -47,6 +47,7 @@ NOTES:
 9.  Some problems are only possible to be solved using BFS, keep that in mind and don't always jump to DFS, 
     analyze and visualize before you write code, don't take too much time though. Inspiration from 994
 '''
+from typing import List
 
 class Solution:
     def hasDuplicate(self, nums: List[int]) -> bool:
@@ -171,3 +172,20 @@ class Solution:
         res = [a*b for a,b in zip(left2right, right2left)]
         
         return res
+
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        column = [set() for _ in range(9)]
+        rows = [set() for _ in range(9)]
+        square = [set() for _ in range(9)]
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == ".":
+                    continue
+                if (board[i][j] in column[j] or
+                    board[i][j] in rows[i] or 
+                    board[i][j] in square[((i//3)*3+j//3)]):
+                    return False
+                column[j].add(board[i][j])
+                rows[i].add(board[i][j])
+                square[((i//3)*3+j//3)].add(board[i][j])
+        return True
