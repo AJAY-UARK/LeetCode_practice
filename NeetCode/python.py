@@ -206,3 +206,14 @@ class Solution:
             r -= 1
 
         return True
+    
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        hashTable = {}
+        for i in range(len(numbers)):
+            difference = target - numbers[i]
+
+            if numbers[i] in hashTable:
+                return [hashTable[numbers[i]]+1, i+1]
+            
+            hashTable[difference] = i
+        return []
