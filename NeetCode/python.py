@@ -267,3 +267,30 @@ class Solution:
             if nums[middle] > target: right = middle -1
             
         return -1
+
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        rows = len(matrix)
+        columns = len(matrix[0])
+        top = 0
+        bottom = rows - 1
+        while top <= bottom:
+            middle = (top + bottom)//2
+            if matrix[middle][0] > target:
+                bottom = middle - 1
+            elif matrix[middle][columns-1] < target:
+                top = middle + 1
+            else: 
+                break
+        if top > bottom: return False
+        left = 0
+        right = columns - 1
+        while left <= right:
+            half = (left + right) // 2
+            if target == matrix[middle][half]:
+                return True
+            elif target > matrix[middle][half]:
+                left = half + 1
+            else:
+                right = half - 1
+            
+        return False
