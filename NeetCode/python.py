@@ -48,6 +48,7 @@ NOTES:
     analyze and visualize before you write code, don't take too much time though. Inspiration from 994
 '''
 from typing import List
+import math
 
 class Solution:
     def hasDuplicate(self, nums: List[int]) -> bool:
@@ -294,3 +295,21 @@ class Solution:
                 right = half - 1
             
         return False
+    
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        left = 1
+        right = max(piles)
+        ans = right
+
+        while left <= right:
+            k = (left + right) // 2
+            hours = 0
+            for pile in piles:
+                ceil = math.ceil(pile / k)
+                hours += ceil
+            if hours <= h:
+                ans = min(ans, k)
+                right = k - 1
+            else:
+                left = k + 1
+        return ans
