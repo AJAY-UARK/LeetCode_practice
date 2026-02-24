@@ -330,3 +330,16 @@ class Solution:
             else:# elif nums[mid] < nums[r]:
                 r = mid - 1
         return ans
+    
+    def isValid(self, s: str) -> bool:
+        l = []
+        closed = {'}': '{', ']':'[', ')':'('}
+        for i in range(len(s)):
+            if s[i] in closed:
+                if len(l) == 0:
+                    return False
+                if closed[s[i]] != l.pop():                   
+                    return False
+            else:
+                l.append(s[i])
+        return True if not l else False
