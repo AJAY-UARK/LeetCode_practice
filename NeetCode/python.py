@@ -362,6 +362,21 @@ class Solution:
                 elif i == '/':
                     stack.append(int(v1 / v2))
         return stack[0]
+    
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        n = len(temperatures)
+        answer = [0] * n
+        stack = []  # will store indices
+
+        for i in range(n):
+            # while current temp is warmer than stack top
+            while stack and temperatures[i] > temperatures[stack[-1]]:
+                prev_index = stack.pop()
+                answer[prev_index] = i - prev_index
+            
+            stack.append(i)
+
+        return answer
 
 class MinStack:
 
