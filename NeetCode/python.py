@@ -364,6 +364,22 @@ class Solution:
         return stack[0]
     
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+
+        # stack = []
+        # warmer = 0
+        # for i in range(len(temperatures)):
+        #     if len(stack) == 0:
+        #         warmer = temperatures.pop()
+        #         stack.append(0)
+        #     else:
+        #         curr = temperatures.pop()
+        #         if warmer > curr:
+        #             stack.append(stack[-1] + 1)
+        #         else:
+        #             stack.append(0)
+        #             warmer = curr
+        # ans = stack[::-1]
+        # return ans
         n = len(temperatures)
         answer = [0] * n
         stack = []  # will store indices
