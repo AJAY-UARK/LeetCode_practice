@@ -411,6 +411,20 @@ class Solution:
             if len(stack) >= 2 and stack[-1] <= stack[-2]:
                 stack.pop()
         return len(stack)
+    
+    def maxProfit(self, prices: List[int]) -> int:
+        l = 0
+        r = 1
+        count = 0
+
+        while r < len(prices):
+            if prices[r] > prices[l]:
+                profit = prices[r] - prices[l]
+                count = max(profit, count)
+            else:
+                l = r
+            r += 1
+        return count
 
 class MinStack:
 
